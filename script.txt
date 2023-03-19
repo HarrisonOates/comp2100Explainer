@@ -1,0 +1,27 @@
+# Script for explainer video
+
+Suppose we have some ordered data we want to contain in some structure. (List of data in boxes)
+We could put it in a normal binary search tree, but at worst it will take O(n) comparisons to find what we want.
+But what if we could guarantee how fast we could access any node in the tree in the worst case?
+
+A red-black tree offers such a guarantee, that searching for an element would take O(log n) time in the worst case.
+So how does this data structure work?
+
+Let's take all the requirements of a binary search tree: Each node has precisely two children.
+The left child of each node is either null or less than or equal to the node itself, and the right child is either null or greater than the node itself.
+To these, let's add some constraints:
+1. Every node is either red or black
+2. All null nodes are considered black
+3. The root node is always black
+3. A red node does not have a red child
+4. Every path from a node to a descendent null node goes through the same number of black nodes.
+
+With this, let's make our BST from before into a red-black tree.
+Now, the height of the tree is constrained. To find 13 this time, we only need to check 4 nodes.
+We're good now. That is, until we need to insert a new node into the tree.
+
+Our algorithm to insert a node is pretty straightforward.
+First, we check if our tree is empty.
+Ours isn't, so we're going to insert the new node as a leaf and colour it as red.
+If the parent of the new node is red and its sibling node is also red then flip the colour of both the neighbour and parent and grandparent nodes.
+If the parent of the new node is red and its sibling is empty or null, then rotate the new node and parent.
