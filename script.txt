@@ -23,7 +23,7 @@ No issues here, but what if we now insert 12?
 Just like before, we traverse the tree until we find where it should go and insert it as a red node.
 But now we've violated the 3rd rule. No biggie, we just 'push' the red colour up to the parent and recolour both child nodes.
 Now we have the 3rd rule violated again, but we can't push red up to the root because of rule 2, so we need to rotate the tree.
-6 goes to node and becomes black, its left subtree becomes 3's right subtree, and node 3 becomes the new left subtree.
+6 goes to the root and becomes black, its left subtree becomes 3's right subtree, and 3 becomes the new left subtree.
 This tree satisfies all the criteria of a red-black tree, so we're left with a fully balanced red-black tree.
 The same process of balancing happens whenever a node is inserted or deleted, recolouring or balancing up the tree to keep search in O(log n) time.
 I hope this toy example helps you with visualising how a red-black tree self-balances. See you next time.

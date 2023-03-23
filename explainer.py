@@ -100,7 +100,33 @@ class RedBlackTree(MovingCameraScene):
         self.play(ReplacementTransform(travelingCircle5, travelingCircle6))
         self.play(ReplacementTransform(travelingCircle6, travelingCircle7))
         self.wait()
-        self.clear()
+        self.play(
+            FadeOut(node_2),
+            FadeOut(node_2_label),
+            FadeOut(node_3),
+            FadeOut(node_3_label),
+            FadeOut(node_5),
+            FadeOut(node_5_label),
+            FadeOut(node_6),
+            FadeOut(node_6_label),
+            FadeOut(node_7),
+            FadeOut(node_7_label),
+            FadeOut(node_11),
+            FadeOut(node_11_label),
+            FadeOut(node_13),
+            FadeOut(node_13_label),
+            FadeOut(left_arrow1),
+            FadeOut(left_arrow2),
+            FadeOut(left_arrow3),
+            FadeOut(left_arrow4),
+            FadeOut(right_arrow1),
+            FadeOut(right_arrow2),
+            FadeOut(caption),
+            FadeOut(travelingCircle7)
+        )
+
+
+
         sectionTitle = Title("But what if we could guarantee worst case performance?")
         self.play(self.camera.frame.animate.scale(1).move_to(sectionTitle))
         self.wait()
