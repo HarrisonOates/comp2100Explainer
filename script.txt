@@ -1,27 +1,29 @@
 # Script for explainer video
 
-Suppose we have some ordered data we want to contain in some structure. (List of data in boxes)
-We could put it in a normal binary search tree, but at worst it will take O(n) comparisons to find what we want.
+Hello there, I want to build intuition around how Red-Black trees work through animation.
+Suppose we have some ordered data we want to contain in some structure, like for example these numbers, for easy lookup.
+We could put them in a normal binary search tree, but at worst it will take O(n) comparisons to find what we want - this is slow, and defeats the purpose of putting them in a tree in the first place!
 But what if we could guarantee how fast we could access any node in the tree in the worst case?
 
 A red-black tree offers such a guarantee, that searching for an element would take O(log n) time in the worst case.
 So how does this data structure work?
 
-Let's take all the requirements of a binary search tree: Each node has precisely two children.
-The left child of each node is either null or less than or equal to the node itself, and the right child is either null or greater than the node itself.
-To these, let's add some constraints:
+Let's take all the requirements of a binary search tree, and add some extra constraints:
 1. Every node is either red or black
-2. All null nodes are considered black
-3. The root node is always black
+2. All null nodes, and the root node, are considered black
 3. A red node does not have a red child
-4. Every path from a node to a descendent null node goes through the same number of black nodes.
+4. Every path from node to descendant leaf contains the same number of black nodes
 
 With this, let's make our BST from before into a red-black tree.
 Now, the height of the tree is constrained. To find 13 this time, we only need to check 4 nodes.
 We're good now. That is, until we need to insert a new node into the tree.
 
-Our algorithm to insert a node is pretty straightforward.
-First, we check if our tree is empty.
-Ours isn't, so we're going to insert the new node as a leaf and colour it as red.
-If the parent of the new node is red and its sibling node is also red then flip the colour of both the neighbour and parent and grandparent nodes.
-If the parent of the new node is red and its sibling is empty or null, then rotate the new node and parent.
+If we inserted 1 into the tree, we just traverse the tree until we find where it should go and insert it as a red node.
+No issues here, but what if we now insert 12?
+Just like before, we traverse the tree until we find where it should go and insert it as a red node.
+But now we've violated the 3rd rule. No biggie, we just 'push' the red colour up to the parent and recolour both child nodes.
+Now we have the 3rd rule violated again, but we can't push red up to the root because of rule 2, so we need to rotate the tree.
+6 goes to node and becomes black, its left subtree becomes 3's right subtree, and node 3 becomes the new left subtree.
+This tree satisfies all the criteria of a red-black tree, so we're left with a fully balanced red-black tree.
+The same process of balancing happens whenever a node is inserted or deleted, recolouring or balancing up the tree to keep search in O(log n) time.
+I hope this toy example helps you with visualising how a red-black tree self-balances. See you next time.

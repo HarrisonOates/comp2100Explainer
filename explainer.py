@@ -5,7 +5,7 @@ class RedBlackTree(MovingCameraScene):
         # Create title
         titlepage = Text("Let's learn about Red-Black Trees")
 
-        self.play(Write(titlepage, run_time = 4))
+        self.play(Write(titlepage, run_time = 5))
         self.wait(2)
         self.play(Unwrite(titlepage))
 
@@ -106,7 +106,7 @@ class RedBlackTree(MovingCameraScene):
         self.wait()
         self.play(Write(sectionTitle))
 
-        self.wait()
+        self.wait(10)
 
 
 
@@ -122,7 +122,7 @@ class RedBlackTree(MovingCameraScene):
         node_6_label = Text("6", font_size=20).next_to(node_6, DOWN, buff=0.2)
 
         node_5 = Circle(fill_opacity=1, radius=0.3, color=GREY).next_to(node_6, LEFT+DOWN, buff=1)
-        left_node3_label = Text("5", font_size=20).next_to(node_5, DOWN, buff=0.2)
+        node_5_label = Text("5", font_size=20).next_to(node_5, DOWN, buff=0.2)
 
         node_11 = Circle(fill_opacity=1, radius=0.3, color=GREY).next_to(node_6, RIGHT+DOWN, buff=1)
         node_11_label = Text("11", font_size=20).next_to(node_11, DOWN, buff=0.2)
@@ -145,9 +145,9 @@ class RedBlackTree(MovingCameraScene):
         # Add all nodes and arrows to the scene
         self.play(self.camera.frame.animate.scale(1.5).move_to(node_6))
 
-        redBlackRequirements = Text("Required properties of Red-Black Trees\n1. Every node is either red or black\n2. All null nodes are considered black\n3. The root node is always black\n4. A red node does not have a red child\n5. The count of black nodes to leaves should be equal", font_size = 30)
-        self.play(Write(redBlackRequirements.next_to(node_3, RIGHT + RIGHT, buff = 1), run_time = 15))
-        self.wait()
+        redBlackRequirements = Text("Required properties of Red-Black Trees\n1. Every node is either red or black\n2. All null nodes, and the root node, are considered black\n3. A red node does not have a red child\n4. Every path from node to leaf contains the same number of black nodes", font_size = 30)
+        self.play(Write(redBlackRequirements.next_to(node_3, RIGHT + RIGHT, buff = 1), run_time = 20))
+        self.wait(5)
         self.play(
             Create(node_7),
             Create(node_7_label),
@@ -156,7 +156,7 @@ class RedBlackTree(MovingCameraScene):
             Create(node_2),
             Create(node_2_label),
             Create(node_5),
-            Create(left_node3_label),
+            Create(node_5_label),
             Create(node_6),
             Create(node_6_label),
             Create(left_arrow1),
@@ -172,3 +172,175 @@ class RedBlackTree(MovingCameraScene):
         )
 
         self.wait(5)
+        # Check for 13
+        travelingCircle1 = Circle(fill_opacity=0, radius = 0.3, color = GREEN)
+        travelingCircle2 = Circle(fill_opacity=0, radius = 0.3, color = GREEN).next_to(travelingCircle1, RIGHT + DOWN, buff = 1)
+        travelingCircle3 = Circle(fill_opacity=0, radius = 0.3, color = GREEN).next_to(travelingCircle2, RIGHT + DOWN, buff = 1)
+        travelingCircle4 = Circle(fill_opacity=0, radius = 0.3, color = GREEN).next_to(travelingCircle3, RIGHT + DOWN, buff = 1)
+        self.play(ReplacementTransform(travelingCircle1, travelingCircle2))
+        self.wait()
+        self.play(ReplacementTransform(travelingCircle2, travelingCircle3))
+        self.wait()
+        self.play(ReplacementTransform(travelingCircle3, travelingCircle4))
+        self.wait()
+        self.play(FadeOut(travelingCircle4))
+
+
+
+        self.wait(7)
+        # But what if we want to add another node?
+        node_1 = Circle(fill_opacity=1, radius=0.3, color=RED).next_to(node_2, LEFT+DOWN, buff=1)
+        node_1_label = Text("1", font_size=20).next_to(node_1, DOWN, buff=0.2)
+        left_arrow5 = Arrow(node_2, node_1, buff=0.1)
+
+        travelingCircle1 = Circle(fill_opacity=0, radius = 0.3, color = GREEN)
+        travelingCircle2 = Circle(fill_opacity=0, radius = 0.3, color = GREEN).next_to(travelingCircle1, LEFT + DOWN, buff = 1)
+        travelingCircle3 = Circle(fill_opacity=0, radius = 0.3, color = GREEN).next_to(travelingCircle2, LEFT + DOWN, buff = 1)
+        self.play(ReplacementTransform(travelingCircle1, travelingCircle2))
+        self.wait()
+        self.play(ReplacementTransform(travelingCircle2, travelingCircle3))
+        self.wait()
+        self.play(ReplacementTransform(travelingCircle3, node_1))
+        self.play(Create(node_1_label))
+        self.play(Create(left_arrow5))
+        self.wait()
+
+        # But what if we insert a node that interrupts the colouring scheme?
+        node_12 = Circle(fill_opacity=1, radius=0.3, color=RED).next_to(node_13, LEFT+DOWN, buff=1)
+        node_12_label = Text("12", font_size=20).next_to(node_12, DOWN, buff=0.2)
+        left_arrow6 = Arrow(node_13, node_12)
+
+        travelingCircle1 = Circle(fill_opacity=0, radius = 0.3, color = GREEN)
+        travelingCircle2 = Circle(fill_opacity=0, radius = 0.3, color = GREEN).next_to(travelingCircle1, RIGHT + DOWN, buff = 1)
+        travelingCircle3 = Circle(fill_opacity=0, radius = 0.3, color = GREEN).next_to(travelingCircle2, RIGHT + DOWN, buff = 1)
+        travelingCircle4 = Circle(fill_opacity=0, radius = 0.3, color = GREEN).next_to(travelingCircle3, RIGHT + DOWN, buff = 1)
+        self.play(ReplacementTransform(travelingCircle1, travelingCircle2))
+        self.wait()
+        self.play(ReplacementTransform(travelingCircle2, travelingCircle3))
+        self.wait()
+        self.play(ReplacementTransform(travelingCircle3, travelingCircle4))
+        self.wait()
+        self.play(ReplacementTransform(travelingCircle4, node_12))
+        self.play(Create(node_12_label))
+        self.play(Create(left_arrow6))
+        self.wait(5)
+        # We need to recolour the tree.
+
+        self.play(FadeToColor(node_13, color = GREY),
+                FadeToColor(node_7, color = GREY),
+                FadeToColor(node_11, color = RED),
+            )
+        self.wait(9)
+        # We can't push redness any further up the tree, so we need to rotate.
+        
+        node_6q = Circle(fill_opacity=1, radius=0.3, color=GREY)
+        node_6_labelq = Text("6", font_size=20).next_to(node_3, DOWN, buff=0.2)
+
+        node_3q = Circle(fill_opacity=1, radius=0.3, color=RED).next_to(node_6q, 2*LEFT + DOWN, buff=1)
+        node_3_labelq = Text("3", font_size=20).next_to(node_3q, DOWN, buff=0.2)
+
+        node_2q = Circle(fill_opacity=1, radius=0.3, color=GREY).next_to(node_3q, LEFT + DOWN, buff=1)
+        node_2_labelq = Text("2", font_size=20).next_to(node_2q, DOWN, buff=0.2)
+        
+        node_1q = Circle(fill_opacity=1, radius=0.3, color=RED).next_to(node_2q, LEFT+DOWN, buff=1)
+        node_1_labelq = Text("1", font_size=20).next_to(node_1q, DOWN, buff=0.2)
+
+        node_5q = Circle(fill_opacity=1, radius=0.3, color=GREY).next_to(node_3q, RIGHT+DOWN, buff=1)
+        node_5_labelq = Text("5", font_size=20).next_to(node_5q, DOWN, buff=0.2)
+
+        node_11q = Circle(fill_opacity=1, radius=0.3, color=RED).next_to(node_6q, 2*RIGHT+DOWN, buff=1)
+        node_11_labelq = Text("11", font_size=20).next_to(node_11q, DOWN, buff=0.2)
+
+        # Create node_7 node
+        node_7q = Circle(fill_opacity=1, radius=0.3, color=GREY).next_to(node_11q, LEFT+DOWN, buff=1)
+        node_7_labelq = Text("7", font_size=20).next_to(node_7q, DOWN, buff=0.2)
+
+        node_13q = Circle(fill_opacity=1, radius=0.3, color=GREY).next_to(node_11q, RIGHT+DOWN, buff=1)
+        node_13_labelq = Text("13", font_size=20).next_to(node_13q, DOWN, buff=0.2)
+
+        node_12q = Circle(fill_opacity=1, radius=0.3, color=RED).next_to(node_13q, LEFT+DOWN, buff=1)
+        node_12_labelq = Text("12", font_size=20).next_to(node_12q, DOWN, buff=0.2)
+
+        left_arrow1q = Arrow(node_3q, node_2q, buff=0.1)
+        left_arrow2q = Arrow(node_6q, node_3q, buff=0.1)
+        left_arrow3q = Arrow(node_3q, node_5q, buff=0.1)
+        left_arrow4q = Arrow(node_6q, node_11q, buff=0.1)
+        left_arrow5q = Arrow(node_2q, node_1q, buff=0.1)
+        left_arrow6q = Arrow(node_13q, node_12q)
+        right_arrow1q = Arrow(node_11q, node_7q, buff=0.1)
+        right_arrow2q = Arrow(node_11q, node_13q, buff=0.1)
+
+        self.play(ReplacementTransform(node_6, node_6q),
+            ReplacementTransform(node_3, node_3q),
+            ReplacementTransform(node_2, node_2q),
+            ReplacementTransform(node_1, node_1q),
+            ReplacementTransform(node_5, node_5q),
+            ReplacementTransform(node_11, node_11q),
+            ReplacementTransform(node_7, node_7q),
+            ReplacementTransform(node_13,node_13q),
+            ReplacementTransform(node_12, node_12q),
+
+            ReplacementTransform(node_6_label, node_6_labelq),
+            ReplacementTransform(node_3_label, node_3_labelq),
+            ReplacementTransform(node_2_label, node_2_labelq),
+            ReplacementTransform(node_1_label, node_1_labelq),
+            ReplacementTransform(node_5_label, node_5_labelq),
+            ReplacementTransform(node_11_label, node_11_labelq),
+            ReplacementTransform(node_7_label, node_7_labelq),
+            ReplacementTransform(node_13_label, node_13_labelq),
+            ReplacementTransform(node_12_label, node_12_labelq),
+            ReplacementTransform(left_arrow1, left_arrow1q),
+            ReplacementTransform(left_arrow2, left_arrow2q),
+            ReplacementTransform(left_arrow3, left_arrow3q),
+            ReplacementTransform(left_arrow4, left_arrow4q),
+            ReplacementTransform(left_arrow5, left_arrow5q),
+            ReplacementTransform(left_arrow6, left_arrow6q),
+            ReplacementTransform(right_arrow1, right_arrow1q),
+            ReplacementTransform(right_arrow2, right_arrow2q)
+        )
+        self.wait(20)
+        fadeanims = [
+            FadeOut(node_6q),
+            FadeOut(node_3q),
+            FadeOut(node_1q),
+            FadeOut(node_5q),
+            FadeOut(node_11q),
+            FadeOut(node_7q),
+            FadeOut(node_13q),
+            FadeOut(node_12q),
+            FadeOut(node_2q),
+            FadeOut(node_6_labelq),
+            FadeOut(node_3_labelq),
+            FadeOut(node_1_labelq),
+            FadeOut(node_5_labelq),
+            FadeOut(node_11_labelq),
+            FadeOut(node_7_labelq),
+            FadeOut(node_13_labelq),
+            FadeOut(node_12_labelq),
+            FadeOut(node_2_labelq),
+            FadeOut(left_arrow1q),
+            FadeOut(left_arrow2q),
+            FadeOut(left_arrow3q),
+            FadeOut(left_arrow4q),
+            FadeOut(left_arrow5q),
+            FadeOut(left_arrow6q),
+            FadeOut(right_arrow1q),
+            FadeOut(right_arrow2q), 
+            FadeOut(sectionTitle),
+            FadeOut(redBlackRequirements),
+        ]
+
+        self.play(AnimationGroup(*fadeanims))
+        self.wait()
+        self.play(self.camera.frame.animate.scale(1).move_to(ORIGIN))
+
+        sectionTitle = Title("Today we saw how Red-Black trees guarantee {$\mathcal{O} (\log n)$} search")
+        acknowledgement = Text("Made by Harrison Oates with the Manim library.")
+        source = Text("Source code in the description.").next_to(acknowledgement, DOWN, buff = 1)
+
+        self.play(Create(sectionTitle))
+        self.wait()
+        self.play(Create(acknowledgement), Create(source))
+        self.wait(10)
+        self.play(Uncreate(acknowledgement), Uncreate(source))
+        self.wait()
